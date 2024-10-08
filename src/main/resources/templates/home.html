@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div align="center">
+		<h3 style="color: limegreen" th:if="${success}" th:text="${success}"></h3>
+		<h1>Student Management</h1>
+		<a href="add-student"><button>Add Student</button></a>
+		<a href="fetch-student"><button>Fetch Student</button></a>
+
+
+	</div>
+
+	<br><br>
+	<div align="center" th:if="${add}">
+		<h1>Add Student</h1>
+		<form action="/add-student" method="post">
+			Name: <input type="text" name="name" placeholder="Enter Name"><br><br>
+			Email: <input type="email" name="email" placeholder="Enter Email"><br><br>
+			Gender: <input type="radio" name="gender" value="male">male
+			<input type="radio" name="gender" value="female">Female<br><br>
+			Mobile: <input type="tel" pattern="{0-9}[10]" name="mobile" placeholder="Enter Mobile Number">
+			<br><br>
+			<button>Add</button>
+		</form>
+	</div>
+	
+
+	<div align="center" th:if="${edit}">
+		<h1>Edit Student</h1>
+		<form action="/update-student" method="post">
+			RollNo: <input type="text" name="id" th:value="${emp.id}" readonly><br><br>
+			Name: <input type="text" name="name" th:value="${emp.name}" placeholder="Enter Name"><br><br>
+			Email: <input type="email" name="email" th:value="${emp.email}"placeholder="Enter Email"><br><br>
+			Gender: <input type="radio" name="gender" value="male">male
+			<input type="radio" name="gender" value="female">Female<br><br>
+			Mobile: <input type="tel" pattern="{0-9}[10]" name="mobile" th:value="${emp.mobile}" placeholder="Enter Mobile Number">
+			<br><br>
+			<button>Update </button>
+		</form>
+	</div>
+
+	<div align="center" th:if="${records}">
+		<table border="1">
+			<tr>
+				<th>RollNo</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Gender</th>
+				<th>Mobile</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+
+			<tr th:each="emp:${records}">
+				<td th:text="${emp.id}"></td>
+				<td th:text="${emp.name}"></td>
+				<td th:text="${emp.email}"></td>
+				<td th:text="${emp.gender}"></td>
+				<td th:text="${emp.mobile}"></td>
+			
+				<td><a th:href="'/edit?id='+${emp.id}"><button>Edit</button></a></td>
+				<td><a th:href="'/delete?id='+${emp.id}"><button>Delete</button></a></td>
+
+
+
+			</tr>
+		</table>
+	</div>
+
+	<script th:if="${success}" th:inline="javascript">
+		alert([[${success}]]);
+	</script>
+
+</body>
+
+</html>
