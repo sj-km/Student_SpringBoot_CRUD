@@ -1,82 +1,327 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Student Management System</title>
+	<style>
+	:root {
+		--primary-color: #2563eb;
+		--secondary-color: #1e40af;
+		--danger-color: #dc2626;
+		--danger-hover: #991b1b;
+		--success-color: #16a34a;
+		--text-primary: #1e293b;
+		--text-secondary: #475569;
+		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+		--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+		font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+		background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+						url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3');
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		color: #ffffff;
+		line-height: 1.5;
+		min-height: 100vh;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+		backdrop-filter: blur(8px);
+		background-color: rgba(255, 255, 255, 0.1);
+		border-radius: 16px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: #ffffff;
+		margin-bottom: 2rem;
+		text-align: center;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		border: 2px solid rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(4px);
+	}
+
+	.btn-primary {
+		background: var(--primary-color);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		background: var(--secondary-color);
+	}
+
+	.btn-danger {
+		background: var(--danger-color);
+		color: white;
+	}
+
+	.btn-danger:hover {
+		background: var(--danger-hover);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	.form-container {
+		background: rgba(255, 255, 255, 0.95);
+		padding: 2rem;
+		border-radius: 1rem;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		max-width: 600px;
+		margin: 2rem auto;
+		color: var(--text-primary);
+	}
+
+	.form-group {
+		margin-bottom: 1.5rem;
+	}
+
+	.form-label {
+		display: block;
+		margin-bottom: 0.5rem;
+		color: var(--text-secondary);
+		font-weight: 500;
+	}
+
+	.form-input {
+		width: 100%;
+		padding: 0.75rem;
+		border: 1px solid #e2e8f0;
+		border-radius: 0.5rem;
+		transition: all 0.3s ease;
+	}
+
+	.form-input:focus {
+		outline: none;
+		border-color: var(--primary-color);
+		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+	}
+
+	.table-container {
+		overflow-x: auto;
+		margin: 2rem 0;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: separate;
+		border-spacing: 0;
+	}
+
+	th {
+		background: var(--primary-color);
+		color: white;
+		font-weight: 600;
+		text-align: left;
+		padding: 1rem;
+	}
+
+	td {
+		padding: 1rem;
+		border-bottom: 1px solid #e2e8f0;
+		color: var(--text-primary);
+	}
+
+	tr:last-child td {
+		border-bottom: none;
+	}
+
+	tr:hover {
+		background: rgba(255, 255, 255, 0.98);
+	}
+
+	.success-alert {
+		background: rgba(22, 163, 74, 0.9);
+		color: white;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		margin-bottom: 1rem;
+		animation: slideIn 0.3s ease-out;
+		backdrop-filter: blur(4px);
+	}
+
+	@keyframes slideIn {
+		from {
+			transform: translateY(-10px);
+			opacity: 0;
+		}
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	.radio-group {
+		display: flex;
+		gap: 1rem;
+		margin: 0.5rem 0;
+	}
+
+	.radio-label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1rem;
+			margin: 1rem;
+		}
+
+		.form-container {
+			padding: 1.5rem;
+		}
+
+		.btn {
+			width: 100%;
+			justify-content: center;
+			margin-bottom: 0.5rem;
+		}
+	}
+</style>
 </head>
-
 <body>
-	<div align="center">
-		<h3 style="color: limegreen" th:if="${success}" th:text="${success}"></h3>
-		<h1>Student Management</h1>
-		<a href="add-student"><button>Add Student</button></a>
-		<a href="fetch-student"><button>Fetch Student</button></a>
+	<div class="container">
+		<div th:if="${success}" class="success-alert" th:text="${success}"></div>
+		<h1>Student Management System</h1>
+		
+		<div class="action-buttons" style="text-align: center; margin-bottom: 2rem;">
+			<a href="add-student"><button class="btn btn-primary">Add Student</button></a>
+			<a href="fetch-student"><button class="btn btn-primary">Fetch Students</button></a>
+		</div>
 
+		<div th:if="${add}" class="form-container">
+			<h2>Add New Student</h2>
+			<form action="/add-student" method="post">
+				<div class="form-group">
+					<label class="form-label">Name</label>
+					<input type="text" name="name" class="form-input" placeholder="Enter Name" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Email</label>
+					<input type="email" name="email" class="form-input" placeholder="Enter Email" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Gender</label>
+					<div class="radio-group">
+						<label class="radio-label">
+							<input type="radio" name="gender" value="male"> Male
+						</label>
+						<label class="radio-label">
+							<input type="radio" name="gender" value="female"> Female
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Mobile</label>
+					<input type="tel" name="mobile" class="form-input" placeholder="Enter Mobile Number" required>
+				</div>
+				<button type="submit" class="btn btn-primary">Add Student</button>
+			</form>
+		</div>
 
-	</div>
+		<div th:if="${edit}" class="form-container">
+			<h2>Edit Student</h2>
+			<form action="/update-student" method="post">
+				<div class="form-group">
+					<label class="form-label">Roll No</label>
+					<input type="text" name="id" class="form-input" th:value="${emp.id}" readonly>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Name</label>
+					<input type="text" name="name" class="form-input" th:value="${emp.name}" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Email</label>
+					<input type="email" name="email" class="form-input" th:value="${emp.email}" required>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Gender</label>
+					<div class="radio-group">
+						<label class="radio-label">
+							<input type="radio" name="gender" value="male" th:checked="${emp.gender == 'male'}"> Male
+						</label>
+						<label class="radio-label">
+							<input type="radio" name="gender" value="female" th:checked="${emp.gender == 'female'}"> Female
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-label">Mobile</label>
+					<input type="tel" name="mobile" class="form-input" th:value="${emp.mobile}" required>
+				</div>
+				<button type="submit" class="btn btn-primary">Update Student</button>
+			</form>
+		</div>
 
-	<br><br>
-	<div align="center" th:if="${add}">
-		<h1>Add Student</h1>
-		<form action="/add-student" method="post">
-			Name: <input type="text" name="name" placeholder="Enter Name"><br><br>
-			Email: <input type="email" name="email" placeholder="Enter Email"><br><br>
-			Gender: <input type="radio" name="gender" value="male">male
-			<input type="radio" name="gender" value="female">Female<br><br>
-			Mobile: <input type="tel" pattern="{0-9}[10]" name="mobile" placeholder="Enter Mobile Number">
-			<br><br>
-			<button>Add</button>
-		</form>
-	</div>
-	
-
-	<div align="center" th:if="${edit}">
-		<h1>Edit Student</h1>
-		<form action="/update-student" method="post">
-			RollNo: <input type="text" name="id" th:value="${emp.id}" readonly><br><br>
-			Name: <input type="text" name="name" th:value="${emp.name}" placeholder="Enter Name"><br><br>
-			Email: <input type="email" name="email" th:value="${emp.email}"placeholder="Enter Email"><br><br>
-			Gender: <input type="radio" name="gender" value="male">male
-			<input type="radio" name="gender" value="female">Female<br><br>
-			Mobile: <input type="tel" pattern="{0-9}[10]" name="mobile" th:value="${emp.mobile}" placeholder="Enter Mobile Number">
-			<br><br>
-			<button>Update </button>
-		</form>
-	</div>
-
-	<div align="center" th:if="${records}">
-		<table border="1">
-			<tr>
-				<th>RollNo</th>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Gender</th>
-				<th>Mobile</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-
-			<tr th:each="emp:${records}">
-				<td th:text="${emp.id}"></td>
-				<td th:text="${emp.name}"></td>
-				<td th:text="${emp.email}"></td>
-				<td th:text="${emp.gender}"></td>
-				<td th:text="${emp.mobile}"></td>
-			
-				<td><a th:href="'/edit?id='+${emp.id}"><button>Edit</button></a></td>
-				<td><a th:href="'/delete?id='+${emp.id}"><button>Delete</button></a></td>
-
-
-
-			</tr>
-		</table>
+		<div th:if="${records}" class="table-container">
+			<table>
+				<thead>
+					<tr>
+						<th>Roll No</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Gender</th>
+						<th>Mobile</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="emp:${records}">
+						<td th:text="${emp.id}"></td>
+						<td th:text="${emp.name}"></td>
+						<td th:text="${emp.email}"></td>
+						<td th:text="${emp.gender}"></td>
+						<td th:text="${emp.mobile}"></td>
+						<td>
+							<a th:href="'/edit?id='+${emp.id}"><button class="btn btn-primary">Edit</button></a>
+							<a th:href="'/delete?id='+${emp.id}"><button class="btn btn-danger">Delete</button></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<script th:if="${success}" th:inline="javascript">
-		alert([[${success}]]);
+		setTimeout(() => {
+			const alert = document.querySelector('.success-alert');
+			if (alert) {
+				alert.style.opacity = '0';
+				alert.style.transform = 'translateY(-10px)';
+				setTimeout(() => alert.remove(), 300);
+			}
+		}, 3000);
 	</script>
-
 </body>
-
 </html>
